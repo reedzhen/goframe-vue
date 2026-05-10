@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>扫码关注，立得福利</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="/resource/js/qrcode.min.js"></script>
+    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+    <style>
+        .header{
+            padding: 30px 0;
+            text-align: center;
+            font-size: 30px;
+            font-weight: bold;
+        }
+        .content{
+            margin-top:20px;
+            text-align:center;
+        }
+        #qrcode{
+
+            border: 5px solid black;
+        }
+        .scan-text{
+            padding: 10px;
+            border: 5px solid black;
+            font-size: 20px;
+        }
+        .footer{
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+<div class="header">
+    xxxxxx
+</div>
+<div class="content">
+    <div>
+        <div id="codeDiv" style="display: none;"></div>
+        <div id="qrcode"></div>
+    </div>
+    <div style="margin-top: 10px">
+        <span class="scan-text">长按关注立得福利</span>
+    </div>
+</div>
+<div class="footer">
+    <div>福利介绍</div>
+</div>
+
+</body>
+<script>
+    var url='{{.qrcode}}';
+    var qrcode = new QRCode("codeDiv", {
+        text: url,
+        render: "canvas", //渲染方式指定canvas方式
+        width: 200,
+        height: 200,
+        typeNumber:-1,//计算模式
+        colorDark : "#000000",
+        colorLight : "#ffffff",
+        correctLevel : QRCode.CorrectLevel.H
+    });
+    var canvas=document.getElementsByTagName('canvas')[0];
+    var img = convertCanvasToImage(canvas);
+    $('#qrcode').append(img);// 添加DOM
+    //从 canvas 提取图片 image
+    function convertCanvasToImage(canvas) {
+        //新建Image对象
+        var image = new Image();
+        // canvas.toDataURL 返回的是一串Base64编码的URL
+        image.src = canvas.toDataURL("image/png");
+        return image;
+    }
+</script>
+</html>
