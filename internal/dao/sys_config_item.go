@@ -8,15 +8,15 @@ import (
 	"goframe-vben/internal/dao/internal"
 )
 
-// sysMenuTempDao is the data access object for the table sys_menu_temp.
+// sysConfigItemDao is the data access object for the table sys_config_item.
 // You can define custom methods on it to extend its functionality as needed.
-type sysMenuTempDao struct {
-	*internal.SysMenuTempDao
+type sysConfigItemDao struct {
+	*internal.SysConfigItemDao
 }
 
 var (
-	// SysMenuTemp is a globally accessible object for table sys_menu_temp operations.
-	SysMenuTemp = sysMenuTempDao{internal.NewSysMenuTempDao()}
+	// SysConfigItem is a globally accessible object for table sys_config_item operations.
+	SysConfigItem = sysConfigItemDao{internal.NewSysConfigItemDao()}
 )
 
 // Add your custom methods and functionality below.

@@ -81,8 +81,8 @@ type (
 		GetList(ctx context.Context, in dto.DictDataGetListInput) (out []*entity.SysDictData, err error)
 	}
 	ILoginRecord interface {
-		// Invoke 异步调用登录日志
-		Invoke(ctx context.Context, in dto.LoginRecordCreateInput)
+		// AsyncCreate 异步调用登录日志
+		AsyncCreate(ctx context.Context, in dto.LoginRecordCreateInput)
 		// Create 新建登录日志
 		Create(ctx context.Context, in dto.LoginRecordCreateInput) (err error)
 		// Page 登录日志分页

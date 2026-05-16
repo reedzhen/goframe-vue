@@ -25,8 +25,8 @@ func NewLoginRecord() *sLoginRecord {
 	return &sLoginRecord{}
 }
 
-// Invoke 异步调用登录日志
-func (s *sLoginRecord) Invoke(ctx context.Context, in dto.LoginRecordCreateInput) {
+// AsyncCreate 异步调用登录日志
+func (s *sLoginRecord) AsyncCreate(ctx context.Context, in dto.LoginRecordCreateInput) {
 	if err := grpool.AddWithRecover(ctx, func(ctx context.Context) {
 		if err := s.Create(ctx, in); err != nil {
 			g.Log().Error(ctx, err)
