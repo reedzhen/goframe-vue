@@ -17,10 +17,26 @@ import (
 
 type (
 	IConfig interface {
-		// GetConfigByGroup 根据分组名称获取配置列表
-		GetConfigByGroup(ctx context.Context, group string) (out *dto.ConfigGetListOutput, err error)
-		// UpdateByGroup 更新指定分组的配置
-		UpdateByGroup(ctx context.Context, in dto.ConfigUpdateInput) error
+		// ModuleList 获取配置模块列表
+		ModuleList(ctx context.Context, in dto.ConfigModuleListInput) (out []*entity.SysConfigModule, err error)
+		// ModuleCreate 新增配置模块
+		ModuleCreate(ctx context.Context, in dto.ConfigModuleCreateInput) error
+		// ModuleUpdate 编辑配置模块
+		ModuleUpdate(ctx context.Context, in dto.ConfigModuleUpdateInput) error
+		// ModuleDelete 删除配置模块
+		ModuleDelete(ctx context.Context, id int64) error
+		// ItemPage 获取配置项分页
+		ItemPage(ctx context.Context, in dto.ConfigItemPageInput) (out *query.Result, err error)
+		// ItemCreate 新增配置项
+		ItemCreate(ctx context.Context, in dto.ConfigItemCreateInput) error
+		// ItemUpdate 编辑配置项
+		ItemUpdate(ctx context.Context, in dto.ConfigItemUpdateInput) error
+		// ItemDelete 删除配置项
+		ItemDelete(ctx context.Context, id int64) error
+		// GetValuesByModuleCode 根据模块编码获取配置值
+		GetValuesByModuleCode(ctx context.Context, moduleCode string) (out *dto.ConfigGetValuesOutput, err error)
+		// SaveValuesByModuleCode 保存模块配置值
+		SaveValuesByModuleCode(ctx context.Context, in dto.ConfigSaveValuesInput) error
 		// GetUpload 获取上传配置
 		GetUpload(ctx context.Context) (out *dto.ConfigUploadOutput, err error)
 	}

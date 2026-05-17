@@ -37,8 +37,16 @@ type IAdminCommon interface {
 }
 
 type IAdminConfig interface {
-	Update(ctx context.Context, req *config.UpdateReq) (res *config.UpdateRes, err error)
-	GetListByGroup(ctx context.Context, req *config.GetListByGroupReq) (res *config.GetListByGroupRes, err error)
+	ModuleList(ctx context.Context, req *config.ModuleListReq) (res config.ModuleListRes, err error)
+	ModuleCreate(ctx context.Context, req *config.ModuleCreateReq) (res *config.ModuleCreateRes, err error)
+	ModuleUpdate(ctx context.Context, req *config.ModuleUpdateReq) (res *config.ModuleUpdateRes, err error)
+	ModuleDelete(ctx context.Context, req *config.ModuleDeleteReq) (res *config.ModuleDeleteRes, err error)
+	ItemPage(ctx context.Context, req *config.ItemPageReq) (res *config.ItemPageRes, err error)
+	ItemCreate(ctx context.Context, req *config.ItemCreateReq) (res *config.ItemCreateRes, err error)
+	ItemUpdate(ctx context.Context, req *config.ItemUpdateReq) (res *config.ItemUpdateRes, err error)
+	ItemDelete(ctx context.Context, req *config.ItemDeleteReq) (res *config.ItemDeleteRes, err error)
+	ValueGet(ctx context.Context, req *config.ValueGetReq) (res *config.ValueGetRes, err error)
+	ValueSave(ctx context.Context, req *config.ValueSaveReq) (res *config.ValueSaveRes, err error)
 }
 
 type IAdminCron interface {

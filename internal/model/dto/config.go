@@ -1,20 +1,109 @@
 package dto
 
 import (
-	"github.com/gogf/gf/v2/frame/g"
-	"github.com/gogf/gf/v2/net/ghttp"
+	"strings"
+
+	"github.com/gogf/gf/v2/database/gdb"
+	"goframe-vben/internal/library/query"
 )
 
-// ConfigUpdateInput 系统配置编辑
-type ConfigUpdateInput struct {
-	Group string
-	Data  g.MapStrAny
+// ConfigModuleCreateInput 配置模块新增
+type ConfigModuleCreateInput struct {
+	Code        string
+	Name        string
+	Description string
+	Sort        int
+	Status      int
 }
 
-// ConfigGetListOutput 系统配置列表返回
-type ConfigGetListOutput struct {
-	Group string      `json:"group"` // 配置分组
-	Data  g.MapStrAny `json:"data"`  // 配置数据
+// ConfigModuleUpdateInput 配置模块编辑
+type ConfigModuleUpdateInput struct {
+	Id          int64
+	Code        string
+	Name        string
+	Description string
+	Sort        int
+	Status      int
+}
+
+// ConfigModuleListInput 配置模块列表查询
+type ConfigModuleListInput struct {
+	Keywords string
+	Status   *int
+}
+
+// ConfigItemPageInput 配置项分页查询
+type ConfigItemPageInput struct {
+	query.PageParam
+	ModuleId int64
+	Keywords string
+	Status   *int
+}
+
+// Cond 组装配置项分页查询条件。
+func (q *ConfigItemPageInput) Cond(m *gdb.Model) *gdb.Model {
+	if q.ModuleId > 0 {
+		m = m.Where("module_id", q.ModuleId)
+	}
+	if q.Status != nil {
+		m = m.Where("status", *q.Status)
+	}
+	if keywords := strings.TrimSpace(q.Keywords); keywords != "" {
+		like := "%" + keywords + "%"
+		m = m.Where("(name LIKE ? OR config_key LIKE ?)", like, like)
+	}
+	return m
+}
+
+// ConfigItemCreateInput 配置项新增
+type ConfigItemCreateInput struct {
+	ModuleId     int64
+	Name         string
+	ConfigKey    string
+	ConfigValue  string
+	DefaultValue string
+	ValueType    string
+	InputType    int
+	InputParams  string
+	Description  string
+	Sort         int
+	Status       int
+	IsSystem     int
+}
+
+// ConfigItemUpdateInput 配置项编辑
+type ConfigItemUpdateInput struct {
+	Id           int64
+	ModuleId     int64
+	Name         string
+	ConfigKey    string
+	ConfigValue  string
+	DefaultValue string
+	ValueType    string
+	InputType    int
+	InputParams  string
+	Description  string
+	Sort         int
+	Status       int
+	IsSystem     int
+}
+
+// ConfigValueItemInput 配置值保存项
+type ConfigValueItemInput struct {
+	ConfigKey   string
+	ConfigValue string
+}
+
+// ConfigSaveValuesInput 保存模块配置值
+type ConfigSaveValuesInput struct {
+	ModuleCode string
+	Values     []ConfigValueItemInput
+}
+
+// ConfigGetValuesOutput 配置值返回
+type ConfigGetValuesOutput struct {
+	ModuleCode string         `json:"moduleCode"` // 模块编码
+	Data       map[string]any `json:"data"`       // 配置键值
 }
 
 type ConfigUploadOutput struct {
@@ -53,12 +142,6 @@ type ConfigBasicOutput struct {
 	BasicHomeCover3 string `json:"home_cover3"`
 }
 
-// ConfigUploadLogoInput 上传logo
-type ConfigUploadLogoInput struct {
-	File *ghttp.UploadFile // 上传文件对象
-	Dir  string            `json:"dir"` // 上传文件保存的目录
-}
-
 // PayConfig 支付相关配置
 type PayConfig struct {
 	Debug           bool   `json:"debug"`
@@ -70,8 +153,7 @@ type PayConfig struct {
 	WxPayPrivateKey string `json:"payWxPayPrivateKey"` //微信支付私钥KEY
 	WXSubMchId      string `json:"subMchId"`           //子商户ID
 	WXSubAppId      string `json:"subAppId"`           //子商户APPID
-	// 微信支付
-	//SaobeiMerchantNo  string `json:"saobeiMerchantNo"`  //扫呗商户号
+
 	SaobeiInstNo      string `json:"saobeiInstNo"`      //商户系统机构号inst_no
 	SaobeiKey         string `json:"saobeiKey"`         // 商户系统令牌
 	SaobeiTerminalId  string `json:"saobeiTerminalId"`  //支付系统：商户号终端号
