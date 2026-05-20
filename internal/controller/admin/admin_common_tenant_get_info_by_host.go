@@ -3,7 +3,6 @@ package admin
 import (
 	"context"
 	"github.com/gogf/gf/v2/frame/g"
-	"goframe-vben/internal/library/gftenant"
 	"goframe-vben/internal/service"
 
 	"github.com/gogf/gf/v2/errors/gerror"
@@ -13,10 +12,10 @@ import (
 
 func (c *ControllerCommon) TenantGetInfoByHost(ctx context.Context, req *common.TenantGetInfoByHostReq) (res *common.TenantGetInfoByHostRes, err error) {
 	// 非贴牌不返回数据
-	mode := g.Cfg().MustGet(ctx, "tenant.mode").String()
-	if mode == gftenant.ModeNone {
-		return nil, nil
-	}
+	//mode := g.Cfg().MustGet(ctx, "tenant.mode").String()
+	//if mode == gftenant.ModeNone {
+	//	return nil, nil
+	//}
 
 	tenant, err := service.Tenant().GetInfoWithCache(g.RequestFromCtx(ctx))
 	if err != nil || tenant == nil {

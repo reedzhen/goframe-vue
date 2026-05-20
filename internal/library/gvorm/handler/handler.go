@@ -1,10 +1,8 @@
 package handler
 
 import (
-	"fmt"
 	"github.com/gogf/gf/v2/database/gdb"
 	"goframe-vben/internal/library/contexts"
-	"goframe-vben/internal/library/gftenant"
 )
 
 // FilterUserScope 过滤当前用户数据权限
@@ -93,14 +91,16 @@ func FilterSubRoleUser(userId int64) gdb.ModelHandler {
 
 // FilterTenant 便捷设置当前贴牌
 func FilterTenant(table ...string) gdb.ModelHandler {
-	return func(m *gdb.Model) *gdb.Model {
-		if v := gftenant.GetTenant(m.GetCtx()); v > 0 {
-			if len(table) > 0 {
-				m = m.Where(fmt.Sprintf("%s.%s=?", table[0], gftenant.GetColumnName()), v)
-			} else {
-				m = m.Where(fmt.Sprintf("%s=?", gftenant.GetColumnName()), v)
-			}
-		}
-		return m
-	}
+	//return func(m *gdb.Model) *gdb.Model {
+	//	if v := gftenant.GetTenant(m.GetCtx()); v > 0 {
+	//		if len(table) > 0 {
+	//			m = m.Where(fmt.Sprintf("%s.%s=?", table[0], gftenant.GetColumnName()), v)
+	//		} else {
+	//			m = m.Where(fmt.Sprintf("%s=?", gftenant.GetColumnName()), v)
+	//		}
+	//	}
+	//	return m
+	//}
+
+	return nil
 }

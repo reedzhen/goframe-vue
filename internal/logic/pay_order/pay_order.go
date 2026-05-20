@@ -39,7 +39,7 @@ func (s *sPayOrder) CreateOrder(ctx context.Context, in dto.PayOrderCreateInput)
 		return
 	}
 	if payOrder != nil {
-		g.Log().Warningf(ctx, "[创建支付订单] MerchantOrderNo(%s) 已经存在对应的支付单(%v)", in.MerchantOrderId, payOrder) // 理论来说，不会出现这个情况
+		g.Log().Warningf(ctx, "[创建支付订单] MerchantOrderNo(%d) 已经存在对应的支付单(%v)", in.MerchantOrderId, payOrder) // 理论来说，不会出现这个情况
 		return payOrder.Id, nil
 	}
 

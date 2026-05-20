@@ -7,7 +7,6 @@ import (
 	_ "goframe-vben/addons"
 	"goframe-vben/internal/boot"
 	"goframe-vben/internal/cmd"
-	_ "goframe-vben/internal/library/gftenant"
 	_ "goframe-vben/internal/logic"
 	_ "goframe-vben/internal/packed"
 )

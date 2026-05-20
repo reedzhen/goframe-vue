@@ -9,14 +9,12 @@ import (
 	"github.com/gogf/gf/v2/database/gdb"
 	"github.com/gogf/gf/v2/errors/gcode"
 	"github.com/gogf/gf/v2/errors/gerror"
-	"github.com/gogf/gf/v2/frame/g"
 	"github.com/gogf/gf/v2/util/gconv"
 	"github.com/gogf/gf/v2/util/gmode"
 	"goframe-vben/internal/consts"
 	"goframe-vben/internal/dao"
 	"goframe-vben/internal/library/cache"
 	"goframe-vben/internal/library/contexts"
-	"goframe-vben/internal/library/gftenant"
 	"goframe-vben/internal/library/query"
 	"goframe-vben/internal/model/do"
 	"goframe-vben/internal/model/dto"
@@ -46,11 +44,12 @@ func NewConfig() *sConfig {
 
 // getCacheKey 获取配置缓存 key。
 func (s *sConfig) getCacheKey(ctx context.Context, moduleCode string) string {
-	mode := g.Cfg().MustGet(ctx, "tenant.mode").String()
-	if mode == gftenant.ModeNone {
-		return fmt.Sprintf(consts.CacheConfigKey, moduleCode)
-	}
-	return fmt.Sprintf(consts.CacheTenantConfigKey, gftenant.GetTenant(ctx), moduleCode)
+	//mode := g.Cfg().MustGet(ctx, "tenant.mode").String()
+	//if mode == gftenant.ModeNone {
+	//	return fmt.Sprintf(consts.CacheConfigKey, moduleCode)
+	//}
+	//return fmt.Sprintf(consts.CacheTenantConfigKey, gftenant.GetTenant(ctx), moduleCode)
+	return fmt.Sprintf(consts.CacheConfigKey, moduleCode)
 }
 
 // getValueCache 获取模块配置值缓存。
@@ -70,11 +69,12 @@ func (s *sConfig) getValueCache(ctx context.Context, moduleCode string) (out *dt
 // setValueCache 设置模块配置值缓存。
 func (s *sConfig) setValueCache(ctx context.Context, moduleCode string, data *dto.ConfigGetValuesOutput) error {
 	cacheKey := s.getCacheKey(ctx, moduleCode)
-	ttl := consts.CacheTenantConfigKeyTTL * time.Second
-	mode := g.Cfg().MustGet(ctx, "tenant.mode").String()
-	if mode == gftenant.ModeNone {
-		ttl = consts.CacheConfigKeyTTL * time.Second
-	}
+	//ttl := consts.CacheTenantConfigKeyTTL * time.Second
+	//mode := g.Cfg().MustGet(ctx, "tenant.mode").String()
+	//if mode == gftenant.ModeNone {
+	//	ttl = consts.CacheConfigKeyTTL * time.Second
+	//}
+	ttl := consts.CacheConfigKeyTTL * time.Second
 	return cache.Instance().Set(ctx, cacheKey, data, ttl)
 }
 
