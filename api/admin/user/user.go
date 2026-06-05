@@ -17,6 +17,21 @@ type GetPageRes struct {
 	*query.Result
 }
 
+type GetInfoReq struct {
+	g.Meta `path:"/user/info/{Id}" method:"get" tags:"用户管理" summary:"获取用户详情"`
+	Id     int64 `json:"id" in:"path" v:"required" dc:"用户Id"`
+}
+type GetInfoRes struct {
+	Id             int64  `json:"id" dc:"用户Id"`
+	Username       string `json:"username" dc:"用户账号"`
+	Nickname       string `json:"nickname" dc:"用户昵称"`
+	Phone          string `json:"phone" dc:"手机号"`
+	Avatar         string `json:"avatar" dc:"头像"`
+	RoleId         int64  `json:"roleId" dc:"角色Id"`
+	OrganizationId int64  `json:"organizationId" dc:"机构Id"`
+	Status         int    `json:"status" dc:"状态 1正常/2冻结"`
+}
+
 type CreateReq struct {
 	g.Meta         `path:"/user/create" method:"post" tags:"用户管理" summary:"新增用户"`
 	Username       string `json:"username" v:"required|passport" dc:"用户账号"`

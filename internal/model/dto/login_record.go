@@ -26,7 +26,6 @@ func (q *LoginRecordPageInput) Cond(m *gdb.Model) *gdb.Model {
 
 // LoginRecordCreateInput 登录日志新增
 type LoginRecordCreateInput struct {
-	TenantId  int64  // 租户ID
 	Username  string // 用户账号
 	LoginType uint   // 操作类型 1登录成功/2登录失败/3退出登录
 	Remark    string // 备注

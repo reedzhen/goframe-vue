@@ -24,6 +24,7 @@ const (
 
 	LoginRecordTypeSuc = 1 // 登录日志-登录成功
 	LoginRecordTypeErr = 2 // 登录日志-登录失败
+	LoginRecordTypeOut = 3 // 登录日志-退出登录
 
 	CronStatusActive   CronStatus = "active"   // 运行中
 	CronStatusInactive CronStatus = "inactive" // 已结束

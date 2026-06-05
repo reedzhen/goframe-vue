@@ -37,7 +37,7 @@ type IAdminCommon interface {
 }
 
 type IAdminConfig interface {
-	ModuleList(ctx context.Context, req *config.ModuleListReq) (res config.ModuleListRes, err error)
+	ModuleList(ctx context.Context, req *config.ModuleListReq) (res *config.ModuleListRes, err error)
 	ModuleCreate(ctx context.Context, req *config.ModuleCreateReq) (res *config.ModuleCreateRes, err error)
 	ModuleUpdate(ctx context.Context, req *config.ModuleUpdateReq) (res *config.ModuleUpdateRes, err error)
 	ModuleDelete(ctx context.Context, req *config.ModuleDeleteReq) (res *config.ModuleDeleteRes, err error)
@@ -110,6 +110,7 @@ type IAdminRole interface {
 
 type IAdminUser interface {
 	GetPage(ctx context.Context, req *user.GetPageReq) (res *user.GetPageRes, err error)
+	GetInfo(ctx context.Context, req *user.GetInfoReq) (res *user.GetInfoRes, err error)
 	Create(ctx context.Context, req *user.CreateReq) (res *user.CreateRes, err error)
 	Update(ctx context.Context, req *user.UpdateReq) (res *user.UpdateRes, err error)
 	Delete(ctx context.Context, req *user.DeleteReq) (res *user.DeleteRes, err error)

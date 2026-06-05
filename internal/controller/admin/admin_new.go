@@ -38,6 +38,13 @@ func NewCommon() admin.IAdminCommon {
 	return &ControllerCommon{}
 }
 
+// ControllerPayNotify 仅用于注册无需后台登录态的支付平台回调。
+type ControllerPayNotify struct{}
+
+func NewPayNotify() *ControllerPayNotify {
+	return &ControllerPayNotify{}
+}
+
 type ControllerConfig struct{}
 
 func NewConfig() admin.IAdminConfig {

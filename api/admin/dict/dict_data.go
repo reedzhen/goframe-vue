@@ -16,7 +16,7 @@ type DataGetPageRes struct {
 }
 
 type DataCreateReq struct {
-	g.Meta `path:"/dict-data/create" method:"post" tags:"字典管理" summary:"新增字典项" noAuth:"true"`
+	g.Meta `path:"/dict-data/create" method:"post" tags:"字典管理" summary:"新增字典项"`
 	DictId int64  `json:"dictId" v:"required" dc:"字典id"`
 	Code   string `json:"code" v:"required" dc:"字典项标识"`
 	Name   string `json:"name" v:"required" dc:"字典项名称"`
@@ -26,7 +26,7 @@ type DataCreateReq struct {
 type DataCreateRes struct{}
 
 type DataUpdateReq struct {
-	g.Meta `path:"/dict-data/update" method:"post" tags:"字典管理" summary:"编辑字典项" noAuth:"true"`
+	g.Meta `path:"/dict-data/update" method:"post" tags:"字典管理" summary:"编辑字典项"`
 	Id     int64  `json:"id"  v:"required" dc:"主键ID"`
 	DictId int64  `json:"dictId" v:"required" dc:"字典id"`
 	Code   string `json:"code" v:"required" dc:"字典项标识"`
@@ -37,7 +37,7 @@ type DataUpdateReq struct {
 type DataUpdateRes struct{}
 
 type DataDeleteReq struct {
-	g.Meta `path:"/dict-data/delete/{Id}" method:"post" tags:"字典管理" summary:"删除字典项" noAuth:"true"`
+	g.Meta `path:"/dict-data/delete/{Id}" method:"post" tags:"字典管理" summary:"删除字典项"`
 	Id     int64 `json:"id" v:"required"`
 }
 type DataDeleteRes struct{}

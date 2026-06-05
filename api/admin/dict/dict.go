@@ -15,7 +15,7 @@ type GetPageRes struct {
 }
 
 type CreateReq struct {
-	g.Meta `path:"/dict/create" method:"post" tags:"字典管理" summary:"新增字典" noAuth:"true"`
+	g.Meta `path:"/dict/create" method:"post" tags:"字典管理" summary:"新增字典"`
 	Code   string `json:"code" v:"required" dc:"字典标识"`
 	Name   string `json:"name" v:"required" dc:"字典名称"`
 	Note   string `json:"note" dc:"备注"`
@@ -23,7 +23,7 @@ type CreateReq struct {
 type CreateRes struct{}
 
 type UpdateReq struct {
-	g.Meta `path:"/dict/update" method:"post" tags:"字典管理" summary:"编辑字典" noAuth:"true"`
+	g.Meta `path:"/dict/update" method:"post" tags:"字典管理" summary:"编辑字典"`
 	Id     int64  `json:"id"  v:"required" dc:"主键ID"`
 	Code   string `json:"code" v:"required" dc:"字典标识"`
 	Name   string `json:"name" v:"required" dc:"字典名称"`
@@ -32,7 +32,7 @@ type UpdateReq struct {
 type UpdateRes struct{}
 
 type DeleteReq struct {
-	g.Meta `path:"/dict/delete/{Id}" method:"post" tags:"字典管理" summary:"删除字典" noAuth:"true"`
+	g.Meta `path:"/dict/delete/{Id}" method:"post" tags:"字典管理" summary:"删除字典"`
 	Id     int64 `json:"id" v:"required"`
 }
 type DeleteRes struct{}

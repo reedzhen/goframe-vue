@@ -237,7 +237,7 @@ func (s *sPayOrder) GenNotifyURL(ctx context.Context, in dto.PayOrderGenNotifyUR
 	path = gmeta.Get(object, "path").String()
 	path = strings.ReplaceAll(path, ":extensionNo", in.No)
 	notifyURL = fmt.Sprintf("%s%s%s",
-		g.Cfg().MustGet(ctx, "system.domain").String(),
+		g.Cfg().MustGet(ctx, "app.domain").String(),
 		"/api",
 		path,
 	)

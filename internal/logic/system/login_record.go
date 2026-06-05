@@ -56,13 +56,14 @@ func (s *sLoginRecord) Create(ctx context.Context, in dto.LoginRecordCreateInput
 		IpCity:    nil,
 		LoginType: in.LoginType,
 		Remark:    in.Remark,
-		TenantId:  in.TenantId,
+		//TenantId:  in.TenantId,
 	}
 
 	// 获取ip归属地
 	location, err := ipcity.GetLocation(ctx, ip)
 	if err != nil {
-		return
+		// IP 归属地是辅助信息，查询失败不能影响登录日志落库。
+		g.Log().Warning(ctx, "获取登录IP归属地失败", err)
 	}
 	if location != nil {
 		data.IpCity = strings.TrimSpace(location.Pro + " " + location.City)
